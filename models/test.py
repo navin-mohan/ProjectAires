@@ -6,7 +6,9 @@ from datagen import generate_data,normalize
 
 min_max_scalar = MinMaxScaler()
 
-data = generate_data(300)
+data = generate_data(3000)
+
+np.savetxt('3k.csv',data,delimiter=',')
 
 min_max_scalar.fit(data)
 
@@ -21,8 +23,8 @@ testcase = np.array([
 # temp = min_max_scalar.transform(testcase).reshape(-1, 1)
 
 
-norm_testdata = normalize(testcase,300)
-norm_data 	  = normalize(data,300)
+norm_testdata = normalize(testcase,3000)
+norm_data 	  = normalize(data,3000)
 model = load_model('94.h5')
 
 print(np.sum(abs(model.predict(norm_testdata) - norm_testdata),axis=1))

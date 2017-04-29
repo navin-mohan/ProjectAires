@@ -6,7 +6,7 @@ from datagen import generate_data,normalize
 # from keras.models import load_model
 
 
-data = generate_data(300)
+data = generate_data(3000)
 # input_dim = 6
 # layer_1_dim = 4
 # encode_dim = 3
@@ -42,7 +42,7 @@ data = generate_data(300)
 
 # print(normalized)
 
-normalized = normalize(data,300)
+normalized = normalize(data,3000)
 
 
 
@@ -68,7 +68,7 @@ model.fit(
 		normalized,
 		normalized,
 		epochs=2000,
-		batch_size=30
+		batch_size=60
 	)
 
 
