@@ -9,7 +9,6 @@ age		   = np.abs(np.random.normal(loc=44,scale=20,size=SIZE)).astype(np.integer)
 weather	   = np.append(np.random.choice(np.array([0,1]),int(SIZE*0.99)), np.random.choice(np.array([2,3]),int(SIZE*0.01)))
 
 if weather.shape[0] != SIZE:
-	# print("size:",SIZE-weather.shape[0])
 	weather = np.append(weather,np.random.choice(np.array([0,1,2,3]),SIZE-weather.shape[0])) 
 
 road_quality = np.abs(np.random.normal(loc=0.3,scale=1,size=SIZE))
@@ -24,8 +23,7 @@ dataset = np.array([
 		road_quality,
 		accelerometer,
 		speed
-	])
+	]).T.astype(np.float32)
 
-# print(visibility.shape,age.shape,weather.shape,road_quality.shape,accelerometer.shape,speed.shape)
-print(dataset.T.astype(np.float32))
+print(dataset)
 
