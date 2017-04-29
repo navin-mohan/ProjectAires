@@ -23,3 +23,5 @@ def generate_data(batch_size,seed=10):
 			speed
 		]).T.astype(np.float32)
 
+print(generate_data(30))
+
