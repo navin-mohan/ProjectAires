@@ -2,7 +2,7 @@ from sklearn.preprocessing import MinMaxScaler,OneHotEncoder
 import numpy as np
 from keras.models import Sequential
 from keras.layers import Dense, Activation
-from datagen import generate_data
+from datagen import generate_data,normalize
 # from keras.models import load_model
 
 
@@ -42,20 +42,20 @@ data = generate_data(300)
 
 # print(normalized)
 
-normalized = normalized(data)
+normalized = normalize(data,300)
 
 
 
 model = Sequential()
 
 
-model.add(Dense(5,input_shape=(9,)))
+model.add(Dense(4,input_shape=(8,)))
 model.add(Activation('relu'))
 model.add(Dense(3))
 model.add(Activation('sigmoid'))
-model.add(Dense(5))
+model.add(Dense(4))
 model.add(Activation('sigmoid'))
-model.add(Dense(9))
+model.add(Dense(8))
 model.add(Activation('relu'))
 
 model.compile(

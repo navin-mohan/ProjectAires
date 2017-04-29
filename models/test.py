@@ -11,10 +11,10 @@ data = generate_data(300)
 min_max_scalar.fit(data)
 
 testcase = np.array([
-		[4,30,0,0.8,2,100],
-		[4,30,0,0.8,5,60],
-		[4,30,0,0.8,2,90],
-		[4,30,0,0.8,2,110],
+		[4,0,0.8,2,500],
+		[0.1,0,0.8,2,500],
+		[4,0,0.8,2,250],
+		[4,0,0.8,2,550],
 
 	])
 
@@ -23,10 +23,10 @@ testcase = np.array([
 
 norm_testdata = normalize(testcase,300)
 norm_data 	  = normalize(data,300)
-model = load_model('98.h5')
+model = load_model('94.h5')
 
 print(np.sum(abs(model.predict(norm_testdata) - norm_testdata),axis=1))
-print(np.mean(np.sum(abs(model.predict(norm_data) - norm_data),axis=1)))
+# print(np.mean(np.sum(abs(model.predict(norm_data) - norm_data),axis=1)))
 
 
 

@@ -13,10 +13,10 @@ def normalize(data,batch_size,seed=10):
 	traindata = generate_data(batch_size,seed)
 
 
-	for i in range(6):
+	for i in range(5):
 		d = traindata[:, i]
 		d1 = data[:,i]
-		if i == 3:
+		if i == 2:
 			temp = ohe.transform(d1.reshape(1, -1).T).toarray()
 			print(temp)
 		else:
@@ -32,7 +32,7 @@ def generate_data(batch_size,seed=10):
 	np.random.seed(seed)
 	SIZE = batch_size
 	visibility = np.abs(np.random.normal(loc=2.0,scale=1.5,size=SIZE))
-	age		   = np.abs(np.random.normal(loc=44,scale=20,size=SIZE)).astype(np.integer)
+	# age		   = np.abs(np.random.normal(loc=44,scale=20,size=SIZE)).astype(np.integer)
 	weather	   = np.append(np.random.choice(np.array([0,1]),int(np.floor(SIZE*0.99))), np.random.choice(np.array([2,3]),int(np.ceil(SIZE*0.01)))) 
 	road_quality = np.abs(np.random.normal(loc=0.3,scale=1,size=SIZE))
 	accelerometer = np.abs(np.random.normal(loc=2.2,scale=1,size=SIZE))
@@ -41,7 +41,7 @@ def generate_data(batch_size,seed=10):
 
 	return  np.array([
 			visibility,
-			age,
+			# age,
 			weather,
 			road_quality,
 			accelerometer,
