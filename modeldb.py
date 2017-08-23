@@ -6,12 +6,11 @@ import getPaths
 
 count=0
 
-g=nx.Graph()
 
 def createtbl():
 	con=sql.connect('database.db')
 	cur=con.cursor()
-	cur.execute("CREATE TABLE if not exists users( id integer primary key autoincrement,latitude float not null,longitude float not null)");
+	cur.execute("CREATE TABLE if not exists users( id integer primary key autoincrement,latitude float not null,longitude float not null,anomaly float not null)");
 
 def filterdata():
 	con=sql.connect('database.db')
@@ -20,19 +19,19 @@ def filterdata():
 	con.commit()
 	con.close()
 
-def insert_db(latitude_in,longitude_in):
+def insert_db(latitude_in,longitude_in,anomaly,g):
 	con=sql.connect('database.db')
 	cur=con.cursor()
-	cur.execute("INSERT INTO users(latitude,longitude) VALUES(?,?)",(latitude_in,longitude_in))
+	cur.execute("INSERT INTO users(latitude,longitude,anomaly) VALUES(?,?,?)",(latitude_in,longitude_in,anomaly))
 	global count
 	count=count+1
 	con.commit()
 	cur_data=get_data()
 	x=[y[0] for y in cur_data] 
-	global g
-	g=gengraph.add_node(g,x[count-1])
+	g=gengraph.add_node(g,x[count-1],anomaly)
 	g=gengraph.find_neighbour(cur_data,g,count)
 	con.close()
+	return g
 
 def get_data():
 	con = sql.connect("database.db")
@@ -66,5 +65,4 @@ if __name__=='__main__':
 	for i in d[:5]:
 		insert_db(i[0],i[1])	
 	print(get_data())
-	plot.plot_graph(g)
-	reset_data()
+
